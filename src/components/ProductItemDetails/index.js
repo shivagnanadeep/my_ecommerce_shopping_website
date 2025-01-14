@@ -6,6 +6,7 @@ import { BsPlusSquare } from 'react-icons/bs';
 import { BsDashSquare } from 'react-icons/bs';
 import SimilarProductItem from '../SimilarProductItem';
 import Loader from 'react-loader-spinner';
+import CartContext from '../../context/CartContext';
 
 const statusConstants = {
 	initial: 'INITIAL',
@@ -113,87 +114,97 @@ class ProductItemDetails extends Component {
 		);
 	};
 
-	renderProductDetails = () => {
-		const { productData, quantity, similarProducts } = this.state;
-		const {
-			imageUrl,
-			title,
-			price,
-			description,
-			brand,
-			totalReviews,
-			rating,
-			availability,
-		} = productData;
-		return (
-			<div className="product-item-details-container">
-				<div className="product-item-details">
-					<img
-						src={imageUrl}
-						alt="product"
-						className="product-item-details-image"
-					/>
-					<div className="product-item-details-description">
-						<h1 className="product-item-title">{title}</h1>
-						<p className="product-item-price">{`Rs ${price}/-`}</p>
-						<div className="rating-and-review-container">
-							<div className="rating-container">
-								<p>{rating}</p>
-								<img
-									src="https://assets.ccbp.in/frontend/react-js/star-img.png"
-									alt="star"
-									className="star-image"
-								/>
-							</div>
-							<p className="product-item-reviews">{totalReviews} Reviews</p>
-						</div>
-						<p className="product-description">{description}</p>
-						<p className="product-extra-details">
-							Available: <span className="details-value">{availability}</span>
-						</p>
-						<p className="product-extra-details">
-							Brand: <span className="details-value">{brand}</span>
-						</p>
-						<hr className="hr" />
-						<div className="product-item-count">
-							<button
-								type="button"
-								className="product-count-changer"
-								onClick={this.decrementQuantity}
-							>
-								<BsDashSquare className="product-count-changer-icon" />
-							</button>
-							<p className="product-count">{quantity}</p>
-							<button
-								type="button"
-								className="product-count-changer"
-								onClick={this.incrementQuantity}
-							>
-								<BsPlusSquare className="product-count-changer-icon" />
-							</button>
-						</div>
-						<button
-							type="button"
-							className="add-to-cart-button"
-						>
-							ADD TO CART
-						</button>
-					</div>
-				</div>
-				<div className="similar-products-container">
-					<h1 className="similar-products-title">Similar Products</h1>
-					<ul className="similar-products-list">
-						{similarProducts.map((each) => (
-							<SimilarProductItem
-								productDetails={each}
-								key={each.id}
+	renderProductDetails = () => (
+		<CartContext.Consumer>
+			{(value) => {
+				const { addCartItem } = value;
+				const { productData, quantity, similarProducts } = this.state;
+				const {
+					imageUrl,
+					title,
+					price,
+					description,
+					brand,
+					totalReviews,
+					rating,
+					availability,
+				} = productData;
+				const onClickAddToCart = () => {
+					addCartItem({ ...productData, quantity });
+				};
+				return (
+					<div className="product-item-details-container">
+						<div className="product-item-details">
+							<img
+								src={imageUrl}
+								alt="product"
+								className="product-item-details-image"
 							/>
-						))}
-					</ul>
-				</div>
-			</div>
-		);
-	};
+							<div className="product-item-details-description">
+								<h1 className="product-item-title">{title}</h1>
+								<p className="product-item-price">{`Rs ${price}/-`}</p>
+								<div className="rating-and-review-container">
+									<div className="rating-container">
+										<p>{rating}</p>
+										<img
+											src="https://assets.ccbp.in/frontend/react-js/star-img.png"
+											alt="star"
+											className="star-image"
+										/>
+									</div>
+									<p className="product-item-reviews">{totalReviews} Reviews</p>
+								</div>
+								<p className="product-description">{description}</p>
+								<p className="product-extra-details">
+									Available:{' '}
+									<span className="details-value">{availability}</span>
+								</p>
+								<p className="product-extra-details">
+									Brand: <span className="details-value">{brand}</span>
+								</p>
+								<hr className="hr" />
+								<div className="product-item-count">
+									<button
+										type="button"
+										className="product-count-changer"
+										onClick={this.decrementQuantity}
+									>
+										<BsDashSquare className="product-count-changer-icon" />
+									</button>
+									<p className="product-count">{quantity}</p>
+									<button
+										type="button"
+										className="product-count-changer"
+										onClick={this.incrementQuantity}
+									>
+										<BsPlusSquare className="product-count-changer-icon" />
+									</button>
+								</div>
+								<button
+									type="button"
+									className="add-to-cart-button"
+									onClick={onClickAddToCart}
+								>
+									ADD TO CART
+								</button>
+							</div>
+						</div>
+						<div className="similar-products-container">
+							<h1 className="similar-products-title">Similar Products</h1>
+							<ul className="similar-products-list">
+								{similarProducts.map((each) => (
+									<SimilarProductItem
+										productDetails={each}
+										key={each.id}
+									/>
+								))}
+							</ul>
+						</div>
+					</div>
+				);
+			}}
+		</CartContext.Consumer>
+	);
 
 	renderLoadingView = () => (
 		<div

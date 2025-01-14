@@ -80,6 +80,7 @@
 	border: none;
 	background-color: #3b82f6;
 	color: #ffffff;
+	cursor: pointer;
 }
 .similar-products-container {
 	padding: 80px;

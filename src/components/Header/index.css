@@ -4,14 +4,6 @@
 	border-bottom: 1px solid rgb(243, 243, 243);
 }
 
-@media screen and (max-width: 768px) {
-	.nav-header {
-		flex-direction: column;
-		align-items: center;
-		border-bottom-style: none;
-	}
-}
-
 .nav-content {
 	display: flex;
 	align-items: center;
@@ -20,23 +12,6 @@
 	max-width: 1110px;
 	padding-top: 25px;
 	padding-bottom: 25px;
-}
-@media screen and (max-width: 768px) {
-	.nav-content {
-		flex-direction: column;
-	}
-}
-
-.nav-bar-mobile-logo-container {
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
-}
-
-@media screen and (min-width: 768px) {
-	.nav-bar-mobile-logo-container {
-		display: none;
-	}
 }
 
 .nav-bar-large-container {
@@ -47,20 +22,8 @@
 	max-width: 1110px;
 }
 
-@media screen and (max-width: 767px) {
-	.nav-bar-large-container {
-		display: none;
-	}
-}
-
 .website-logo {
 	width: 110px;
-}
-
-@media screen and (min-width: 768px) {
-	.website-logo {
-		width: 165px;
-	}
 }
 
 .nav-menu {
@@ -74,35 +37,6 @@
 	margin-bottom: 0px;
 }
 
-@media screen and (max-width: 767px) {
-	.nav-menu {
-		display: none;
-	}
-}
-.nav-menu-mobile {
-	width: 100%;
-}
-
-@media screen and (min-width: 768px) {
-	.nav-menu-mobile {
-		display: none;
-	}
-}
-
-.nav-menu-list-mobile {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
-	align-items: center;
-	height: 70px;
-	background-color: #e6f6ff;
-	flex: 1;
-	list-style-type: none;
-	margin-top: 0px;
-	margin-bottom: 0px;
-	padding: 0px;
-}
-
 .nav-menu-item {
 	font-family: 'Roboto';
 	text-decoration: none;
@@ -114,11 +48,9 @@
 .nav-link {
 	text-decoration: none;
 	color: #475569;
-}
-
-.nav-menu-item-mobile {
-	margin: 0px;
-	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .logout-desktop-btn {
@@ -135,31 +67,10 @@
 	outline: none;
 }
 
-@media screen and (max-width: 767px) {
-	.logout-desktop-btn {
-		display: none;
-	}
-}
-.nav-mobile-btn-container {
-	display: flex;
-	justify-content: center;
-	width: 25%;
-}
-
-.nav-mobile-btn {
-	border: none;
-	padding: 0px;
-	background: transparent;
-	cursor: pointer;
-	outline: none;
-}
-
-@media screen and (min-width: 768px) {
-	.nav-mobile-btn {
-		display: none;
-	}
-}
-
 .nav-bar-image {
 	width: 24px;
+}
+.cart-item-count {
+	margin-left: 5px;
+	font-size: 13px;
 }
